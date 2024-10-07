@@ -1,0 +1,15 @@
+<ng-container *ngIf="ordini !== undefined && ordini.length > 0">
+    <div class="ordine" *ngFor="let ordine of ordini">
+        <h4>Totale dell'ordine: {{ordine.totale | currency:"EUR"}}</h4>
+        <div class="articolo" *ngFor="let articolo of ordine.ordine">
+            <img [src]="articolo.immagine" [alt]="articolo.nome">
+
+            <div class="info-articolo">
+                <h3>{{articolo.nome | uppercase}} <span>{{articolo.prezzo_finale | currency:"EUR"}}</span></h3>
+                <p>Colore: <span>{{articolo.colore}}</span></p>
+                <p>Taglia: <span>{{articolo.taglia}}</span></p>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="ordini !== undefined && ordini.length === 0"> Nessun ordine è stato effettuato</ng-container>

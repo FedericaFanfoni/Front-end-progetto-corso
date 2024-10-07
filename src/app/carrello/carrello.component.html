@@ -1,0 +1,149 @@
+<ul class="bread-crumbs">
+    <li><a [routerLink]="['/']">Home /</a></li>
+    <li><a [routerLink]="['carrello']">Carrello</a></li>
+</ul>
+
+<h2>Il tuo carrello</h2>
+
+<div *ngIf="cs.carrello.length == 0" class="carrello-vuoto">
+    <p>{{cs.msg_carrello_vuoto}}</p>
+    <p>Clicca <a [routerLink]="['/']">qui</a> per proseguire con gli acquisti.</p>
+</div>
+
+<div class="container-carrello" *ngIf="cs.carrello.length != 0">
+    <div class="articoli-carrello">
+        <div class="articolo" *ngFor="let articolo of cs.carrello; let i = index">
+            <a [routerLink]="['/scheda-articolo', articolo.nome]"><img [src]="articolo.immagine" [alt]="articolo.nome"></a>
+            <div class="quantita">
+                <h3>{{articolo.nome | uppercase}} <span>{{articolo.prezzo_finale | currency:"EUR"}}</span></h3>
+                <p>Taglia: {{articolo.taglia}}</p>
+                <p>Colore: {{articolo.colore}}</p>
+                <div>Quantità:
+                    <label>
+                        <p (click)="cs.diminuisciQuantita(articolo)">-</p>
+                        <input type="number" [value]="articolo.quantita" [formControl]="cs.array_formControl[i]"
+                            (change)="cs.modificaDaInput(cs.array_formControl[i], articolo)">
+                        <p (click)="cs.aumentaQuantita(articolo)">+</p>
+                    </label>
+                </div>
+            </div>
+            <div>
+                <span (click)="cs.rimuoviArticolo(i)"><i class="fa-regular fa-circle-xmark"></i>ELIMINA</span>
+            </div>
+        </div>
+    </div>
+    <div class="riepilogo-ordine">
+        <h2>Riepilogo Ordine</h2>
+
+        <div class="promo-newsletter">
+            <i class="fa-solid fa-envelope"></i>
+            <p>Iscriviti alla Newsletter per ottenere il codice sconto e altri vantaggi esclusivi.</p>
+        </div>
+        <div class="codice-sconto">
+            <label for="codice-sconto" (click)="apri_accordion == 1 ? apri_accordion = 0 : apri_accordion = 1">CODICE
+                PROMOZIONALE
+                <i class="fas"
+                    [ngClass]="{'fa-chevron-down': apri_accordion != 1,'fa-chevron-up': apri_accordion == 1  }"></i>
+            </label>
+            <div [ngClass]="{'max-height': apri_accordion == 1}">
+                <input type="text" placeholder="Inserisci codice sconto" id="codice-sconto">
+                <button type="button">APPLICA</button>
+            </div>
+        </div>
+        <div class="totale-ordine">
+            <p>Subtotale<span>{{cs.subtotale | currency:"EUR"}}</span></p>
+            <p>IVA (Incluso nel Subtotale)<span>0,00 €</span></p>
+            <p>Costi di spedizione<span>{{cs.costo_spedizione| currency:"EUR"}}</span></p>
+            <p class="totale">Tolale ordine<span>{{ cs.totale| currency:"EUR"}}</span></p>
+        </div>
+        <div class="btn-carrello">
+            <a [routerLink]="['/modulo-pagamento']">PROCEDI AL CHECKOUT</a>
+            <a [routerLink]="['/modulo-pagamento']">FAST CHECKOUT</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-accordion">
+    <div class="accordion">
+        <div>
+            <h3>Come possiamo aiutarti?</h3>
+        </div>
+        <div>
+            <h3 (click)="apri_accordion == 2 ? apri_accordion = 0 : apri_accordion = 2">TEMPI
+                DI CONSEGNA E POLITICA RESI
+                <i class="fas"
+                    [ngClass]="{'fa-chevron-down': apri_accordion != 2,'fa-chevron-up': apri_accordion == 2 }"></i>
+            </h3>
+            <div [ngClass]="{'max-height': apri_accordion == 2}">
+                <p>Gli ordini spediti in <b>Italia</b> vengono consegnati entro <b>2/3 giorni lavorativi.</b></p>
+                <p>Gli ordini spediti verso il resto dell’<b>Unione Europea</b> richiedono circa <b>4/5 giorni
+                        lavorativi.</b></p>
+                <p>
+                    Gli ordini spediti in tutto il <b>resto del mondo</b> vengono consegnati in circa <b>6/7 giorni
+                        lavorativi</b>
+                    (esclusi eventuali ritardi alla dogana).
+                </p>
+                <br>
+                <p>
+                    Se hai cambiato idea, puoi restituire un prodotto entro <b>30 giorni dalla consegna.</b> I prodotti
+                    restituiti non devono essere stati indossati e lavati o alterati in qualsiasi modo e devono avere
+                    tutte le loro etichette originali e devono avere la loro
+                    confezione originale e integra, compresa la scatola La Sportiva.
+                </p>
+                <br>
+                <p>
+                    In caso di reso, <b>i costi di spedizione ed eventuali imposte doganali sono a carico del
+                        cliente.</b>
+                </p>
+                <br>
+                <p>Per maggiori informazioni, consulta <b>l'area servizio clienti.</b></p>
+
+
+            </div>
+        </div>
+        <div>
+            <h3 (click)="apri_accordion == 3 ? apri_accordion = 0 : apri_accordion = 3">COSTI
+                DI SPEDIZIONE E METODI DI PAGAMENTO
+                <i class="fas"
+                    [ngClass]="{'fa-chevron-down': apri_accordion != 3,'fa-chevron-up': apri_accordion == 3 }"></i>
+            </h3>
+            <div [ngClass]="{'max-height': apri_accordion == 3}">
+                <p>
+                    Nell'area clienti sono indicati le stime dei costi di spedizione che possono variare a seconda del
+                    peso
+                    della scatola.
+                </p>
+                <p>Il prezzo finale verra' visualizzato nel carrello prima di effettuare il pagamento.</p>
+                <br>
+                <h4>All'interno dell'Unione europea</h4>
+                <p>
+                    Non ci sono costi aggiuntivi o dazi sui prodotti commercializzati in paesi all'interno dell'Unione
+                    Europea. I clienti non dovranno pagare nulla alla consegna.
+                </p>
+                <br>
+                <h4>Paesi extra-UE</h4>
+                <p>
+                    Spedizioni verso destinazioni al di fuori dell'Unione Europea sono soggette a tasse di importazione
+                    o
+                    dazi doganali. Tali oneri sono esclusivamente a carico del destinatario, che dovrà pagare l'importo
+                    dovuto allo spedizioniere o alle autorità competenti in materia. Non siamo responsabili dei dazi
+                    doganali, che sono di responsabilità del cliente.
+                </p>
+                <br>
+                <p>
+                    Il nostro negozio online accetta pagamenti tramite: PayPal, carta di credito, bonifico bancario,
+                    Amazon Pay
+                </p>
+                <br>
+                <p>
+                    Potrai scegliere il pagamento che preferisci al termine del processo d'acquisto.
+                    Tutti i pagamenti saranno effettuati a favore di chi si occupa delle operazioni di vendita sul
+                    negozio
+                    online La Sportiva.
+                </p>
+                <br>
+                <p>Verifica <b>l'area servizio clienti.</b></p>
+            </div>
+        </div>
+    </div>
+</div>

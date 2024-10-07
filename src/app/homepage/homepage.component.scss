@@ -1,0 +1,336 @@
+@use "../style/utilities/varibili" as var;
+
+:host {
+  display: block;
+  margin-top: 40.6px;
+}
+
+.slider-banner {
+  display: flex;
+
+  & .slide {
+    flex: 0 0 100%;
+    position: relative;
+
+    & div {
+      width: 80%;
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      transform: translate(-50%, 0);
+      color: #fff;
+
+      & h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: var.$pad;
+      }
+
+      & a {
+        margin: 0 auto;
+        width: 200px;
+        padding: 10px;
+        border: solid 1px #fff;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #fff;
+      }
+    }
+  }
+}
+
+main {
+  padding: var.$pad;
+
+  & h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+}
+
+.relative-btn {
+  display: flex;
+  justify-content: space-between;
+
+  & i {
+    display: none;
+    color: #000;
+  }
+}
+
+.container-novita {
+  overflow: hidden;
+  margin-top: var.$pad;
+}
+
+.container-cards {
+  display: flex;
+  padding-bottom: var.$pad_main_lat;
+  gap: var.$pad;
+  overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    height: 3px;
+    background-color: rgba(228, 228, 228, 0.896);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #000;
+    border-radius: 5px;
+  }
+
+  .card {
+    flex: 0 0 55%;
+    border: solid 1px transparent;
+    transition: 1s;
+
+    &:hover {
+      border-color: #838383;
+    }
+
+    &:hover i {
+      color: #000;
+    }
+
+    & a {
+      padding: 0 15px;
+      position: relative;
+    }
+
+    & i {
+      position: absolute;
+      top: 15px;
+      right: 4.5px;
+      color: transparent;
+      font-size: 1.4rem;
+      transition: 0.5s;
+    }
+
+    .card-body {
+      padding: 10px 0;
+    }
+
+    .card-body h4 {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .card-body p {
+      font-size: 0.8rem;
+      text-align: center;
+      margin: 10px 0;
+    }
+  }
+}
+
+.container-grid {
+  margin-top: var.$pad;
+}
+
+.container-grid .grid-uno {
+  display: grid;
+  gap: var.$pad;
+  padding: var.$pad 0;
+  grid-template-columns: 1fr;
+
+  & div {
+    position: relative;
+    overflow: hidden;
+
+    & img {
+      width: 100%;
+      transition: 1s;
+    }
+
+    & a {
+      position: absolute;
+      padding: 10px;
+      border: solid 1px #fff;
+      bottom: 20px;
+      left: 15px;
+      color: #fff;
+      font-size: 0.8rem;
+      z-index: 10;
+
+      &:hover {
+        background-color: #fff;
+        color: #000;
+      }
+      &:hover + img {
+        transform: scale(1.1);
+      }
+    }
+
+    & p {
+      position: absolute;
+      bottom: 75px;
+      left: 15px;
+      color: #fff;
+      font-weight: 700;
+      z-index: 10;
+    }
+  }
+}
+
+.container-grid .grid-due {
+  width: 90%;
+  margin: 0 auto var.$pad;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var.$pad;
+
+  & div {
+    position: relative;
+    overflow: hidden;
+
+    & img {
+      transition: 1s;
+    }
+
+    & a {
+      position: absolute;
+      padding: 10px;
+      border: solid 1px #fff;
+      bottom: 20px;
+      left: 15px;
+      color: #fff;
+      font-size: 0.8rem;
+      z-index: 10;
+
+      &:hover {
+        background-color: #fff;
+        color: #000;
+      }
+
+      &:hover + img {
+        transform: scale(1.1);
+      }
+    }
+
+    & p {
+      position: absolute;
+      bottom: 75px;
+      left: 15px;
+      color: #fff;
+      font-weight: 700;
+      z-index: 10;
+    }
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .container-cards .card {
+      flex: 0 0 45%;
+    }
+  
+}
+
+@media screen and (min-width: 768px) {
+  main {
+    padding: var.$pad_main_lat;
+  }
+
+  .relative-btn i {
+    display: block;
+  }
+
+  .container-cards .card {
+      flex: 0 0 35%;
+    }
+  
+
+  .container-grid .grid-uno {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .container-grid .grid-due {
+    width: 70%;
+    margin: 40px auto;
+    gap: var.$pad_main_lat;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .container-newsletter {
+    margin-top: var.$pad_main_lat;
+    padding: var.$pad_main_lat 0;
+
+    h2 {
+      text-align: left;
+      font-size: 1.8rem;
+    }
+
+    & p {
+      font-size: 1.05rem;
+      margin: var.$pad 0;
+    }
+
+    & .btn-newsletter {
+      margin: 0;
+    }
+  }
+
+  .container-newsletter .newsletter {
+    & div {
+      & a {
+        & span {
+          width: 45px;
+          height: 45px;
+
+          & i {
+            font-size: 1.5rem;
+            color: #000;
+          }
+        }
+
+        & p {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  :host {
+    margin-top: 104px;
+  }
+
+  .slider-banner {
+    display: flex;
+
+    & .slide div {
+      bottom: 40px;
+
+      & h2 {
+        font-size: 2rem;
+      }
+
+      & a {
+        width: 100px;
+      }
+    }
+  }
+
+  .container-novita {
+    padding: 0 var.$pad;
+  }
+
+  .container-cards .card {
+    flex: 0 0 25%;
+  }
+
+  .container-grid .grid-due {
+    width: 65%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container-novita {
+    padding: 0 30px;
+  }
+
+  .slider-banner h2 {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,33 @@
+@use "../../style/utilities/varibili" as var;
+
+:host {
+  display: block;
+  margin-top: 42.2px;
+  padding: var.$pad;
+}
+
+ul {
+  margin: var.$pad 0;
+  border-top: solid 2px var.$background_base;
+
+  & li {
+    border-bottom: solid 2px var.$background_base;
+
+    & a {
+      padding: 12px 0;
+      font-weight: 700;
+      color: #000;
+
+      &:hover {
+        color: var.$color_b;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  :host {
+    margin-top: 104px;
+  }
+}

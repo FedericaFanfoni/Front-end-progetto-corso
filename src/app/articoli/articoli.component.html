@@ -1,0 +1,32 @@
+<ul class="bread-crumbs">
+    <li><a [routerLink]="['/']">Home /</a></li>
+    <li><a [routerLink]="['/']">{{param}}</a></li>
+</ul>
+
+<div class="mostra-sidebar">
+    <div (click)="apri_sidebar === true ? apri_sidebar = false : apri_sidebar = true ">Filtro</div>
+    <div>Ordina</div>
+</div>
+
+<h2>Abbigliamento e calzature</h2>
+
+<p>Articoli trovati: {{totale_articoli}}</p>
+<p *ngIf="articoli && articoli.length == 0">{{messaggio}}</p>
+<div class="container-articoli">
+    <app-sidebar *ngIf="apri_sidebar" [articoli]="articoli" (articoli_sidebar)="ricercaDaSidebar($event)"></app-sidebar>
+    <div class="lista-articoli">
+        <div class="card-articoli" *ngFor="let a of articoli">
+            <a [routerLink]="['/scheda-articolo', a._id]"><img [src]="a.immagine[0]" [alt]="a.nome">
+                <i class="fa-regular fa-heart"></i>
+                <span [ngStyle]="{'display': a.nuovo_arrivo === false ? 'none' : 'block'}">NEW</span>
+            </a>
+            <div class="card-body">
+                <h4>{{a.nome | uppercase}}</h4>
+                <p>{{a.attivita}}</p>
+                <p>{{a.prezzo | currency:"EUR"}}</p>
+            </div>
+            <div class="btn-mostra" [routerLink]="['/scheda-articolo', a._id]">MOSTRA</div>
+        </div>
+    </div>
+</div>
+<mat-paginator [length]="totale_articoli" [hidePageSize]="true" [pageSize]="12" (page)="handlePageEvent($event)" *ngIf="articoli && articoli.length != 0"></mat-paginator>

@@ -1,0 +1,66 @@
+@use "../../style/utilities/varibili" as var;
+
+:host {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.ordine {
+  border-bottom: solid 2px #f1eff0;
+  margin: var.$pad 0;
+  max-height: 500px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+    background-color: #e4e4e4e4;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #000;
+    border-radius: 5px;
+  }
+}
+
+.articolo {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px 0;
+
+  & img {
+    width: 80px;
+    height: 80px;
+  }
+
+  & .info-articolo {
+    width: calc(100% - 100px);
+    margin-left: 20px;
+
+    & h3 {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1rem;
+    }
+
+    & p {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+  }
+}
+
+@media screen and (min-width: 640px) {
+  :host {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 var.$pad;
+  }
+
+  .ordine {
+    padding: 10px;
+    border: solid 2px #f1eff0;
+  }
+}

@@ -1,0 +1,242 @@
+@use "../style/utilities/varibili" as var;
+
+:host {
+  display: block;
+  margin-top: 42.2px;
+  padding: var.$pad;
+
+  & h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 50px 0 80px 0;
+  }
+
+  & p {
+    padding: 0 20px;
+    font-size: 0.8rem;
+  }
+}
+
+.bread-crumbs {
+  display: flex;
+  gap: 10px;
+
+  & a {
+    font-size: 0.8rem;
+    color: #000;
+  }
+}
+
+.mostra-sidebar {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: #fff;
+  display: flex;
+  border: solid 1px #000;
+
+  & div {
+    width: 50%;
+    padding: var.$pad;
+    text-align: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    &:first-child {
+      border-right: solid 1px #000;
+    }
+
+    & i {
+      color: #000;
+    }
+  }
+}
+
+.container-articoli {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+  margin-top: var.$pad_main_lat;
+}
+
+app-sidebar {
+  position: fixed;
+  top: 43.2px;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: calc(100vh - 56.8px - 43.2px);
+  background-color: #fff;
+}
+
+.lista-articoli {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card-articoli {
+  height: max-content;
+  border: solid 1px transparent;
+  transition: 0.6s;
+
+
+  &:hover {
+    border-color: #838383;
+  }
+
+  & a {
+    padding: 0 var.$pad;
+    color: #000;
+    position: relative;
+
+    & span {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: var.$color_b;
+      font-size: 0.7rem;
+      padding: 5px 15px;
+
+    }
+
+    & i {
+      color: transparent;
+      font-size: 1.2rem;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      transition: 0.6s;
+    }
+
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  & .btn-mostra {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background-color: var.$color_b;
+    border-top: solid 1px #838383;
+    cursor: pointer;
+    display: none;
+  }
+}
+
+.card-body {
+  padding: 10px 0;
+
+  & h4 {
+    font-size: .9rem;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  & p {
+    margin: 10px 0;
+    text-align: center;
+  }
+}
+
+mat-paginator {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 640px) {
+  .lista-articoli {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var.$pad 0;
+  }
+
+  .card-articoli {
+    .btn-mostra {
+      display: block;
+      opacity: 0;
+      transition: 0.6s;
+
+      &:hover {
+        color: #fff;
+        background-color: #000;
+      }
+    }
+
+    &:hover .btn-mostra {
+      opacity: 1;
+    }
+
+    &:hover a {
+      & i {
+        color: #000;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .lista-articoli {
+    gap: var.$pad var.$pad_main_lat;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  :host {
+    margin-top: 104px;
+  }
+
+  .bread-crumbs {
+    display: flex;
+    gap: 10px;
+
+    & a {
+      font-size: 0.8rem;
+      color: #000;
+    }
+  }
+
+  .mostra-sidebar {
+    display: none;
+  }
+
+  .container-articoli {
+    display: grid;
+    grid-template-columns: repeat(2, 320px calc(100% - 320px - var.$pad));
+    gap: var.$pad;
+    grid-template-areas: "sidebar articoli";
+
+    & app-sidebar {
+      grid-area: sidebar;
+      position: sticky;
+      top: 43.2px;
+      left: 0;
+    }
+  }
+
+  .lista-articoli {
+    grid-area: articoli;
+    width: 100%;
+  }
+
+  .card-body h4 {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container-articoli {
+    gap: var.$pad_main_lat;
+  }
+
+  .container-articoli {
+    grid-template-columns: repeat(
+      2,
+      370px calc(100% - 370px - var.$pad_main_lat)
+    );
+  }
+}

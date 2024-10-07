@@ -1,0 +1,70 @@
+<div class="container-sidebar">
+    <form [formGroup]="frmRicerca" (ngSubmit)="ricercaArticoli()">
+        <ul class="sidebar">
+            <li class="side-list">
+                <div class="btn-list"><span>GENERE</span><i class="fas fa-chevron-down"></i></div>
+            </li>
+            <li class="side-list">
+                <div (click)="apri_categorie == 1 ? apri_categorie = 0 : apri_categorie = 1" class="btn-list">
+                    <span>ATTIVITA`</span>
+                    <i class="fas"
+                        [ngClass]="{'fa-chevron-down': apri_categorie != 1,'fa-chevron-up': apri_categorie == 1 }"></i>
+                </div>
+                <ul class="attivita" *ngIf="apri_categorie == 1">
+                    <li *ngFor="let att of utility.attivita">
+                        <input type="radio" [id]="att" [value]="att" name="attivita" formControlName="attivita">
+                        <label [for]="att">
+                            <div class="checked"></div>
+                        </label>
+                        <span>{{att}}</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="side-list">
+                <div class="btn-list"><span>TIPO DI PRODOTTO</span><i class="fas fa-chevron-down"></i></div>
+            </li>
+            <li class="side-list">
+                <div class="btn-list"><span>TECNOLOGIA</span><i class="fas fa-chevron-down"></i></div>
+            </li>
+            <li class="side-list">
+                <div (click)="apri_categorie == 2 ? apri_categorie = 0 : apri_categorie = 2" class="btn-list">
+                    <span>TAGLIA</span>
+                    <i class="fas"
+                        [ngClass]="{'fa-chevron-down': apri_categorie != 2,'fa-chevron-up': apri_categorie == 2 }"></i>
+                </div>
+                <ul class="taglie" *ngIf="apri_categorie == 2">
+                    <li *ngFor="let t of utility.taglie">
+                        <input type="radio" [id]="t" [value]="t" name="taglia" formControlName="taglia">
+                        <label [for]="t">{{t}}</label>
+                    </li>
+                </ul>
+            </li>
+            <li class="side-list">
+                <div (click)="apri_categorie == 3 ? apri_categorie = 0 : apri_categorie = 3" class="btn-list">
+                    <span>COLORE</span>
+                    <i class="fas"
+                        [ngClass]="{'fa-chevron-down': apri_categorie != 3,'fa-chevron-up': apri_categorie == 3 }"></i>
+                </div>
+                <ul class="colori" *ngIf="apri_categorie == 3">
+                    <li *ngFor="let colore of utility.colori">
+                        <input type="radio" [id]="colore.nome_colore" [value]="colore.nome_colore" name="colore"
+                            formControlName="colore">
+                        <label [for]="colore.nome_colore">
+                            <div [ngStyle]="{'background-color': colore.primo}"></div>
+                            <div [ngStyle]="{'background-color': colore.secondo}"></div>
+                        </label>
+                    </li>
+                </ul>
+            </li>
+            <li class="side-list">
+                <div class="btn-list" (click)="apri_categorie == 4 ? apri_categorie = 0 : apri_categorie = 4">
+                    <span>PREZZO</span><i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="custom-slider" *ngIf="apri_categorie == 4">
+                    <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options" formGroupName="prezzo"></ngx-slider>
+                </div>
+            </li>
+        </ul>
+        <button type="submit" [disabled]="frmRicerca.invalid" [ngClass]="{'invalid-btn': frmRicerca.invalid}">Ricerca</button>
+    </form>
+</div>

@@ -1,0 +1,96 @@
+<footer>
+    <div class="accordion">
+        <div>
+            <h3 (click)="apriAccordion(1)">CHI SIAMO</h3>
+            <ul *ngIf="numeroAccordion === 1 || mostraAccordion">
+                <li><a href="#" (click)="utility.preventDefault($event)">L'azienda</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Historytelling</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Politica aziendale</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">La Sportiva Stores</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Lavora con noi</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Sostenibilità</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Tecnologia calzatura</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Tecnologia abbigliamento</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 (click)="apriAccordion(2)">BLOG</h3>
+            <ul *ngIf="numeroAccordion === 2 || mostraAccordion">
+                <li><a href="#" (click)="utility.preventDefault($event)">News</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Eventi</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Atleti</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Consigli degli esperti</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Lavora con noi</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Storie</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Video</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Ambassadors</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 (click)="apriAccordion(3)">NEGOZIO ONLINE</h3>
+            <ul *ngIf="numeroAccordion === 3 || mostraAccordion" >
+                <li><a href="#" (click)="utility.preventDefault($event)">Servizio clienti</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Condizioni generali di vendita</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Informazioni</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Spedizioni</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Pagamenti</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Resi</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Contatti</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Traccia il tuo ordine</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Guida taglie calzature</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Guida taglie abbigliamento</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Contraffazione</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h3 (click)="apriAccordion(4)">AZIENDA</h3>
+            <ul *ngIf="numeroAccordion === 4 || mostraAccordion">
+                <li><a href="#" (click)="utility.preventDefault($event)">FAQ</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Negozi consigliati</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Risuolatori autorizzati</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">UGC T&C</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Contattaci</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Resi</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Privacy policy</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Cookies policy</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Guida taglie calzature</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Guida taglie abbigliamento</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Contraffazione</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 (click)="apriAccordion(5)">CATEGORIE</h3>
+            <ul *ngIf="numeroAccordion === 5 || mostraAccordion">
+                <li><a href="#" (click)="utility.preventDefault($event)">Calzature uomo</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Calzature donna</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Abbigliamento uomo</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Abbigliamento donna</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Calzature bambino</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Hardgoods</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Outlet</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">Climbing pro collection</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">HTML redirect sitemap</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="social">
+        <img src="../../assets/image/logo-desktop-transformed.png" alt="logo La Sportiva">
+        <ul>
+            <li>La Sportiva Spa</li>
+            <li>Via Ischia 2</li>
+            <li>38030 Ziano di Fiemme, Trento</li>
+            <li>
+                <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f" (click)="utility.preventDefault($event)"></i></a>
+                <a href="#" title="Instagram"><i class="fa-brands fa-instagram" (click)="utility.preventDefault($event)"></i></a>
+                <a href="#" title="Twitter"><i class="fa-brands fa-twitter" (click)="utility.preventDefault($event)"></i></a>
+                <a href="#" title="Youtube"><i class="fa-brands fa-youtube" (click)="utility.preventDefault($event)"></i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="from"><span><img src="../../assets/image/for-the-planet.webp" alt="For the planet member"></span>
+        <span>SURF FROM<img src="../../assets/image/usa.webp" alt="Bandiera USA"><img src="../../assets/image/canada.webp" alt="Bandiera Canada"></span>
+    </div>
+</footer>
+<div class="copyright">La Sportiva</div>

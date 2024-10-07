@@ -1,0 +1,33 @@
+<div class="container-registrazione">
+
+    <!-- <div class="alert" *ngIf="msg">{{msg}}</div> -->
+
+    <form method="post" [formGroup]="frmRegistrazione" (ngSubmit)="creaAccount()">
+        <h2>Crea un nuovo account</h2>
+        <div>
+            <label for="nome">Nome *</label>
+            <input type="text" name="nome" formControlName="nome">
+        </div>
+        <div>
+            <label for="cognome">Cognome *</label>
+            <input type="text" name="cognome" formControlName="cognome">
+        </div>
+        <div>
+            <label for="email">Email *</label>
+            <input type="text" name="email" formControlName="email">
+        </div>
+        <div>
+            <label for="password">Password *</label>
+            <input type="password" name="password" formControlName="password">
+        </div>
+        <div>
+            <label for="conferma_password">Conferma password * <span class="msg" *ngIf="msg">{{msg}}</span></label>
+            <input type="password" name="conferma_password" formControlName="conferma_password">
+        </div>
+        <p>Hai già un account? <a [routerLink]="['/login']">Clicca qui</a></p>
+        <button type="submit" 
+        [ngClass]="{'invalid-btn': frmRegistrazione.invalid}"
+        [disabled]="frmRegistrazione.invalid">Registrati</button>
+    </form>
+    
+</div>

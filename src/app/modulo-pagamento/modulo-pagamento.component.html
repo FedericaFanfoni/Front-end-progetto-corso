@@ -1,0 +1,185 @@
+<h2>Checkout</h2>
+
+<div class="container-riepilogo">
+    <h3 (click)="apri === 2? apri = 0 : apri = 2">RIEPILOGO ORDINE<i class="fas"
+            [ngClass]="{'fa-chevron-down': apri != 2,'fa-chevron-up': apri == 2 }"></i></h3>
+    <div class="riepilogo-ordine" [ngClass]="{'max-height': apri == 2 }">
+        <div class="articolo-riepilogo" *ngFor="let prodotto of cs.carrello">
+            <div class="img"><img [src]="prodotto.immagine" [alt]="prodotto.nome"></div>
+            <div class="info-riepilogo">
+                <h4>{{prodotto.nome | titlecase}}<span>{{prodotto.prezzo_finale | currency:"EUR"}}</span></h4>
+                <div>
+                    <p>Quantità: <span>{{prodotto.quantita}}</span></p>
+                    <p>Taglia: <span>{{prodotto.taglia}}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="totale-ordine">
+            <p>Subtotale<span>{{cs.subtotale | currency:"EUR"}}</span></p>
+            <p>IVA (Incluso nel Subtotale)<span>0,00 €</span></p>
+            <p>Costi di spedizione<span>{{cs.costo_spedizione| currency:"EUR"}}</span></p>
+            <p class="totale">Tolale ordine<span>{{ cs.totale| currency:"EUR"}}</span></p>
+        </div>
+    </div>
+    <div class="pagamenti-sicuri">
+        <h3>PAGAMENTI SICURI</h3>
+        <p>
+            Le informazioni di pagamento vengono trasferite in base ai più elevati standard di sicurezza. Accettiamo
+            i seguenti metodi di pagamento:
+        </p>
+        <ul>
+            <li><i class="fa-brands fa-cc-mastercard"></i></li>
+            <li><i class="fa-brands fa-cc-visa"></i></li>
+            <li><i class="fa-brands fa-cc-amex"></i></li>
+            <li><i class="fa-brands fa-cc-paypal"></i></li>
+            <li><i class="fa-brands fa-cc-amazon-pay"></i></li>
+            <li><i class="fa-brands fa-cc-apple-pay"></i></li>
+            <li><i class="fa-brands fa-google-pay"></i></li>
+        </ul>
+    </div>
+</div>
+
+<div class="container-dati">
+    <div class="box-amazonPay">
+        <div class="amazonPay">
+            <h3 (click)="apri === 1? apri = 0 : apri = 1">Vuoi procedere con un metodo di pagamento veloce?<i
+                    class="fas" [ngClass]="{'fa-chevron-down': apri != 1,'fa-chevron-up': apri == 1 }"></i></h3>
+            <div [ngClass]="{'max-height2': apri == 1}">
+                <button type="button">Paga con <i class="fa-brands fa-amazon"></i></button>
+                <span>USA IL TUO ACCOUNT AMAZON</span>
+            </div>
+            <p>Se preferisci utilizzare la carta di credito o altri metodi, continua alla sezione successiva.</p>
+        </div>
+    </div>
+
+    <div class="container-form">
+        <h3>I TUOI DATI</h3>
+
+        <div class="btn-group" *ngIf="!accountService.account" >
+            <button type="button" [routerLink]="['/login']">ACCEDI</button>
+            <button type="button" (click)="mostra_form = true; numero_step = 1">CONTINUA COME OSPITE</button>
+        </div>
+
+        <form [formGroup]="wizardForm" class="wizard-form" *ngIf="accountService.account || mostra_form" (ngSubmit)="inviaOrdine()">
+            <h4>Indirizzo spedizione</h4>
+            <div formGroupName="dati_spedizione" class="dati-spedizione" *ngIf="numero_step === 1 || accountService.account ">
+                <div>
+                    <input type="text" name="nome" placeholder="Nome *" formControlName="nome"
+                        [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('nome')!.touched && wizardForm.get('dati_spedizione')!.get('nome')!.invalid}">
+                    <input type="text" name="cognome" placeholder="Cognome *" formControlName="cognome"
+                        [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('cognome')!.touched && wizardForm.get('dati_spedizione')!.get('cognome')!.invalid}">
+                </div>
+                <div formGroupName="indirizzo">
+                    <input type="text" name="via_civico" placeholder="Via e civico *" class="w-100"
+                        formControlName="via_civico" [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('via_civico')!.touched 
+                && wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('via_civico')!.invalid}">
+                    <input type="text" name="cap" placeholder="CAP *" formControlName="cap" [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('cap')!.touched 
+                && wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('cap')!.invalid}">
+                    <input type="text" name="citta" placeholder="Città *" formControlName="citta" [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('citta')!.touched 
+                && wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('citta')!.invalid}">
+                    <input type="text" name="provincia" placeholder="Provincia *" formControlName="provincia" [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('provincia')!.touched 
+                && wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('provincia')!.invalid}">
+                    <input type="text" name="paese" placeholder="Paese *" formControlName="paese" [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('paese')!.touched 
+                && wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('paese')!.invalid}">
+                </div>
+                <div>
+                    <input type="tel" name="telefono" placeholder="Numero di telefono *" class="w-100"
+                        formControlName="telefono"
+                        [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('telefono')!.touched && wizardForm.get('dati_spedizione')!.get('telefono')!.invalid}">
+                    <input type="email" name="email" placeholder="Email *" class="w-100" formControlName="email"
+                        [ngClass]="{'invalid': wizardForm.get('dati_spedizione')!.get('email')!.touched && wizardForm.get('dati_spedizione')!.get('email')!.invalid}">
+                </div>
+
+                <div class="tipo_spedizione">
+                    <h3>Vuoi la spedizione veloce?</h3>
+                    <input type="checkbox" name="tipo-spedizione" id="tipo-spedizione"
+                        formControlName="spedizione_veloce">
+                    <label for="tipo-spedizione" (click)="checkBox()">
+                        <p>+ 15,00 €</p>
+                        <p>Arriverà entro il {{data_spedizione_veloce}}
+                        </p>
+                    </label>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" (click)="numero_step = 2"
+                        [disabled]="wizardForm.get('dati_spedizione')!.pristine || wizardForm.get('dati_spedizione')!.invalid"
+                        [ngClass]="{'invalid-btn': wizardForm.get('dati_spedizione')!.pristine || wizardForm.get('dati_spedizione')!.invalid}">SALVA
+                        E CONTINUA
+                    </button>
+                </div>
+            </div>
+
+            <div class="riepilogo-spedizione" *ngIf="numero_step > 1">
+                <ul>
+                    <li>{{wizardForm.get('dati_spedizione')!.get('nome')!.value | titlecase}}
+                        {{wizardForm.get('dati_spedizione')!.get('cognome')!.value | titlecase}}</li>
+                    <li>{{wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('via_civico')!.value |
+                        titlecase}} -
+                        {{wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('citta')!.value | titlecase}}
+                    </li>
+                    <li>
+                        {{wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('provincia')!.value |
+                        uppercase}},
+                        {{wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('cap')!.value}} -
+                        {{wizardForm.get('dati_spedizione')!.get('indirizzo')!.get('paese')!.value | titlecase}}
+                    </li>
+                    <li>{{wizardForm.get('dati_spedizione')!.get('telefono')!.value}}</li>
+                    <li>{{wizardForm.get('dati_spedizione')!.get('email')!.value}}</li>
+                    <li [ngSwitch]="cs.costo_spedizione"><b>Spedizione
+                            <span *ngSwitchCase="0">gratuita</span>
+                            <span *ngSwitchCase="7">standard</span>
+                            <span *ngSwitchCase="15">veloce</span>
+                            <span *ngSwitchDefault></span></b>
+                    </li>
+                </ul>
+            </div>
+
+            <div formGroupName="dati_carta" class="dati-carta" *ngIf="numero_step === 2">
+                <h3>DATI CARTA</h3>
+                <section>
+                    <div class="w-100">
+                        <label for="numero-carta">Numero carta</label>
+                        <input type="text" name="numero-carta" formControlName="numero_carta"
+                            placeholder="1234 5678 9012 3456*"
+                            [ngClass]="{'invalid': wizardForm.get('dati_carta')!.get('numero_carta')!.touched && wizardForm.get('dati_carta')!.get('numero_carta')!.invalid}">
+
+                        <ul>
+                            <li><i class="fa-brands fa-cc-visa"></i></li>
+                            <li><i class="fa-brands fa-cc-mastercard"></i></li>
+                            <li><i class="fa-brands fa-cc-amex"></i></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <label for="numero-carta">Data di scadenza</label>
+                        <input type="text" name="scadenza" formControlName="scadenza" placeholder="MM/AA *"
+                            [ngClass]="{'invalid': wizardForm.get('dati_carta')!.get('scadenza')!.touched && wizardForm.get('dati_carta')!.get('scadenza')!.invalid}">
+                    </div>
+                    <div>
+                        <label for="numero-carta">CVC/CVV</label>
+                        <input type="text" name="cvv" formControlName="cvv" placeholder="3 cifre *"
+                            [ngClass]="{'invalid': wizardForm.get('dati_carta')!.get('cvv')!.touched && wizardForm.get('dati_carta')!.get('cvv')!.invalid}">
+                    </div>
+                </section>
+                <div class="btn-group">
+                    <button type="submit" [disabled]="wizardForm.invalid"
+                        [ngClass]="{'invalid-btn': wizardForm.invalid}">ORDINA</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="thank-you-page" *ngIf="ordine">
+    <div>
+        <h2>Ordine ricevuto<i class="fa-solid fa-check"></i></h2>
+        <p>
+            Grazie <b>{{ordine.dati_spedizione.nome}} {{ordine.dati_spedizione.cognome}}</b>,<br>
+            il tuo ordine è stato ricevuto. L'email di conferma è stata inviata all'indirizzo
+            <b>{{ordine.dati_spedizione.email}}</b>
+        </p>
+        <br>
+        <p>L'ordine sarà consegnato entro il {{ordine.data_spedizione}}</p>
+        <button type="button" (click)="router.navigateByUrl('/')">Continua con gli acquisti</button>
+    </div>
+</div>

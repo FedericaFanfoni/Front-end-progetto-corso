@@ -1,0 +1,79 @@
+<div class="slider-banner">
+    <div class="slide">
+        <picture>
+            <source srcset="../../assets/image/BannerCWT2024.webp" media="(min-width: 768px)">
+            <source srcset="../../assets/image/BannerCWT2024Mobile.webp">
+            <img src="../../assets/image/BannerCWT2024Mobile.webp" alt="Climb Worldtour 2024">
+        </picture>
+        <div>
+            <h2>IL CLIMB WORLD TOUR CONTINUA</h2>
+            <a href="#" (click)="utility.preventDefault($event)">ISCRIVITI</a>
+        </div>
+    </div>
+</div>
+
+
+<main>
+    <h2 class="relative-btn"><span (click)="indietro('novita')"><i class="fa-solid fa-chevron-left"></i></span>Ultimi arrivi <span (click)="avanti('novita')"><i class="fa-solid fa-chevron-right"></i></span></h2>
+    <div class="container-novita">
+        <div class="container-cards" #containerNovita>
+            <div class="card" *ngFor="let a of nuovi_arrivi" #card>
+                <a [routerLink]="['/scheda-articolo', a._id]"><img [src]="a.immagine[0]" [alt]="a.nome">
+                    <i class="fa-regular fa-heart"></i></a>
+                <div class="card-body">
+                    <h4>{{a.nome | uppercase}}</h4>
+                    <p>Colori disponibili: {{a.colori_disponibili.length}}</p>
+                    <p>A partire da: {{a.prezzo | currency:"EUR"}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-grid">
+        <div class="grid-uno">
+            <div>
+                <a [routerLink]="['articoli']">ACQUISTA ORA</a>
+                <img src="../../assets/image/MandalaNoEdgeMan.webp" alt="Mandala No Edge Man">
+                <p>UOMO</p>
+            </div>
+            <div>
+                <a [routerLink]="['articoli']">ACQUISTA ORA</a>
+                <img src="../../assets/image/MandalaNoEdge2.webp" alt="Mandala No Edge">
+                <p>MANDALA: ALL FUN, NO EDGE</p>
+            </div>
+            <div>
+                <a [routerLink]="['articoli']">ACQUISTA ORA</a>
+                <img src="../../assets/image/MandalaNoEdgeWoman.webp" alt="Mandala No Edge Woman">
+                <p>DONNA</p>
+            </div>
+        </div>
+
+        <div class="grid-due">
+            <div>
+                <p>COME SCEGLIERE LE GIUSTE SCARPE DA TREKKING?</p>
+                <a href="#" (click)="utility.preventDefault($event)">LEGGI TUTTO</a>
+                <img src="../../assets/image/Trekking.webp" alt="trekking">
+            </div>
+            <div>
+                <p>SKIMOUTAINEERING: CÉLIA PERILLAT-PESSEY È LA NEW ENTRY NELLA FAMIGLIA LASPORTIVA</p>
+                <a href="#" (click)="utility.preventDefault($event)">LEGGI TUTTO</a>
+                <img src="../../assets/image/CeliaPerillat.webp" alt="Celia Perillat">
+            </div>
+        </div>
+    </div>
+
+    <h2 class="relative-btn"><span (click)="indietro('bestSeller')"><i class="fa-solid fa-chevron-left"></i></span>Best seller<span (click)="avanti('bestSeller')"><i class="fa-solid fa-chevron-right"></i></span></h2>
+    <div class="container-novita">
+        <div class="container-cards" ##containerBestSeller>
+            <div class="card" *ngFor="let a of best_seller">
+                <a [routerLink]="['/scheda-articolo', a._id]"><img [src]="a.immagine[0]" [alt]="a.nome">
+                    <i class="fa-regular fa-heart"></i></a>
+                <div class="card-body">
+                    <h4>{{a.nome | uppercase}}</h4>
+                    <p>Colori disponibili: {{a.colori_disponibili.length}}</p>
+                    <p>A partire da: {{a.prezzo | currency:"EUR"}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

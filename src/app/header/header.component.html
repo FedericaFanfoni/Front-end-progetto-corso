@@ -1,0 +1,339 @@
+<header>
+    <nav class="nav-mobile">
+        <div class="hamburger">
+            <i class="fa-solid" [ngClass]="{'fa-bars': utility.apri_menu == 0,'fa-xmark': utility.apri_menu >= 1}"
+                (click)="utility.apri_menu >= 1 ? utility.apri_menu = 0 : utility.apri_menu = 1">
+            </i>
+        </div>
+        <div class="container-logo">
+            <a href="#" [routerLink]="['/']" id="logo-mobile">
+                <h1>
+                    <img src="../../assets/image/logo-mobile.png" alt="logo">
+                </h1>
+            </a>
+        </div>
+        <div class="icon-cart-lens">
+            <a href="#" (click)="[utility.preventDefault($event), apri_ricerca = true]">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+            <a href="#" (click)="[utility.preventDefault($event), apriCarrello(1, true)]" *ngIf="utility.mostraIcona">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <small *ngIf="cs.totale_quantita > 0">({{cs.totale_quantita}})</small>
+            </a>
+            <div class="barra-ricerca" [ngClass]="{'mostra-barra': apri_ricerca === true }">
+                <form>
+                    <input type="text" placeholder="Cerca nel negozio" [formControl]="barra_ricerca">
+                    <i class="fa-solid fa-x" (click)="chiudiRicerca()"></i>
+                    <button type="submit">cerca</button>
+                </form>
+                <div class="risultati">
+                    <ul>
+                        <li *ngFor="let articolo of risultati"><a [routerLink]="['/scheda-articolo', articolo._id]" (click)="chiudiRicerca()">{{articolo.nome}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-menu-mobile" [ngClass]="{'transition-menu': utility.apri_menu >= 1}">
+            <ul class="menu-mobile">
+                <li>
+                    <a href="#" (click)="[utility.preventDefault($event), utility.apri_menu = 2]">
+                        <span>LA SPORTIVA</span><i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li><a [routerLink]="['/']"><span>UOMO</span><i class="fas fa-chevron-right"></i></a></li>
+                <li><a [routerLink]="['/']"><span>DONNA</span><i class="fas fa-chevron-right"></i></a></li>
+                <li><a [routerLink]="['/']"><span>BAMBINO</span><i class="fas fa-chevron-right"></i></a></li>
+                <li><a [routerLink]="['/']"><span>OUTLET</span><i class="fas fa-chevron-right"></i></a></li>
+            </ul>
+            <ul class="login-mobile">
+                <li *ngIf="!accountService.account">
+                    <a [routerLink]="['/login']"><i class="fa-solid fa-user"></i>Accedi</a>
+                </li>
+                <li *ngIf="!accountService.account">
+                    <a [routerLink]="['/registrazione']"><i class="fa-solid fa-user-plus"></i>Crea un Account</a>
+                </li>
+                <li *ngIf="accountService.account">
+                    <h3>
+                        <a [routerLink]="['/area-riservata']">Ciao, {{accountService.account.nome}}
+                            {{accountService.account.cognome}}</a>
+                        <span (click)="accountService.logout()">Logout <i
+                                class="fa-solid fa-arrow-right-from-bracket"></i></span>
+                    </h3>
+                </li>
+                <li>
+                    <a href="#" (click)="utility.preventDefault($event)"><i class="fa-solid fa-location-dot"></i>CAMBIA
+                        PAESE</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container-sotto-menu" [ngClass]="{'transition-sinistra': utility.apri_menu >= 2}">
+            <ul class="sotto-menu">
+                <li class="freccia-indietro">
+                    <i class="fa-solid fa-arrow-left-long" (click)="utility.apri_menu = 1"><small>Indietro</small></i>
+                </li>
+                <li>
+                    <h3>La sportiva</h3>
+                </li>
+                <li><a [routerLink]="['/articoli','Nuovi arrivi']"><span>Nuovi arrivi</span><i
+                            class="fas fa-chevron-right"></i></a>
+                </li>
+                <li><a [routerLink]="['/articoli','Best seller']"><span>Best seller</span><i
+                            class="fas fa-chevron-right"></i></a>
+                </li>
+                <li>
+                    <a href="#" (click)="utility.preventDefault($event)" (click)="utility.apri_menu = 3">
+                        <span>Attività</span><i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="utility.preventDefault($event)">
+                        <span>Calzature</span><i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="utility.preventDefault($event)">
+                        <span>Abbigliamento</span><i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+                <li>
+                    <a (click)="utility.preventDefault($event)">
+                        <span>Accessori</span><i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container-sotto-menu"
+            [ngClass]="{'transition-sinistra': utility.apri_menu >=3, 'attivita': utility.apri_menu >= 3}">
+            <ul class="sotto-menu">
+                <li class="freccia-indietro">
+                    <i class="fa-solid fa-arrow-left-long" (click)="utility.apri_menu = 2"><small>Indietro</small></i>
+                </li>
+                <li>
+                    <h3>Attività</h3>
+                </li>
+                <li *ngFor="let a of utility.attivita"><a [routerLink]="['articoli', a]"><span>{{a}}</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="nav-desktop">
+        <div class="login-desktop">
+            <ul class="help">
+                <li><i class="fa-regular fa-circle-question"></i>
+                    <ul class="info">
+                        <li><a href="#" (click)="utility.preventDefault($event)">INFO NEGOZI</a></li>
+                        <li><a href="#" (click)="utility.preventDefault($event)">ASSISTENZA E CONTATTI</a></li>
+                        <li><a href="#" (click)="utility.preventDefault($event)">PAGAMENTI</a></li>
+                        <li><a href="#" (click)="utility.preventDefault($event)">RIMBORSI</a></li>
+                        <li><a href="#" (click)="utility.preventDefault($event)">RESI</a></li>
+                        <li><a href="#" (click)="utility.preventDefault($event)">SPEDIZIONE E CONSEGNA</a></li>
+                        <li><a href="#" (click)="utility.preventDefault($event)">FAQ</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="login">
+                <li><a [routerLink]="['/login']" *ngIf="!accountService.account">ACCEDI</a></li>
+                <li><a [routerLink]="['/registrazione']" *ngIf="!accountService.account">CREA UN ACCOUNT</a></li>
+                <li *ngIf="accountService.account">
+                    <a [routerLink]="['/area-riservata']">CIAO, {{accountService.account.nome | uppercase}}
+                        {{accountService.account.cognome | uppercase}}
+                    </a>
+                </li>
+                <li *ngIf="accountService.account"><a href="#"
+                        (click)="[utility.preventDefault($event), accountService.logout()]">Logout <i
+                            class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+                <li *ngIf="!accountService.account"><a href="#" (click)="utility.preventDefault($event)">CAMBIA PAESE<i
+                            class="fa-solid fa-angle-down"></i></a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="menu-desktop" [ngClass]="{'ridimensiona-menu':scroll > 500}">
+            <ul class="menu-principale">
+                <li (mouseover)="utility.sotto_menu=true"><a href="#"
+                        (click)="utility.preventDefault($event)">NOVITA`</a>
+                    <div class="sotto-menu-desktop" *ngIf="utility.sotto_menu">
+                        <div class="best-seller">
+                            <ul>
+                                <li><a [routerLink]="['/articoli', 'Nuovi arrivi' ]">
+                                        <h2>Nuovi arrivi</h2>
+                                    </a></li>
+                                <li><a [routerLink]="['/articoli', 'Best seller' ]">
+                                        <h2>Best seller</h2>
+                                    </a></li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <h3>COLLEZIONI</h3>
+                                </li>
+                                <li><a href="#" (click)="utility.preventDefault($event)">Alpine Tech Collection</a></li>
+                                <li><a href="#" (click)="utility.preventDefault($event)">Climbing On The Moon</a></li>
+                                <li><a href="#" (click)="utility.preventDefault($event)">Climbing Training
+                                        Collection</a></li>
+                                <li><a href="#" (click)="utility.preventDefault($event)">Climbing Pro Collection</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="categorie-prodotti">
+                            <div>
+                                <ul>
+                                    <li>
+                                        <h2>Calzature</h2>
+                                    </li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Arrampicata</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Mountain Running®</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Escursionismo</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Alpinismo</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Scialpinismo</a></li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <h2>Attività</h2>
+                                    </li>
+                                    <li *ngFor="let att of utility.attivita"><a
+                                            [routerLink]="['/articoli', att]">{{att}}</a></li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <ul>
+                                    <li>
+                                        <h2>Abbigliamento</h2>
+                                    </li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Base Layer</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Maglie Tecniche</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">T-Shirt</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Felpe e Pile</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Gilet</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Giacche Tecniche</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Pantaloni</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Pantaloni Corti</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul>
+                                    <li>
+                                        <h2>Hardgoods</h2>
+                                    </li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Zaini & Trekking</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Maglie Tecniche</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Bastoncini</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Sci</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Accessori</a></li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <h2>Accessori</h2>
+                                    </li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Cappellini e Berretti</a>
+                                    </li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Guanti</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Calzini</a></li>
+                                    <li><a href="#" (click)="utility.preventDefault($event)">Ricambi</a></li>
+                                </ul>
+                            </div>
+                            <div class="world-tour">
+                                <div>
+                                    <a href="#" (click)="utility.preventDefault($event)"><img
+                                            src="../../assets/image/MandalaNoEdge.webp"
+                                            alt="Mandala: all fun no edge"><span>MANDALA: All FUN NO EDGE</span>
+                                    </a>
+                                    <a href="#" (click)="utility.preventDefault($event)"><img
+                                            src="../../assets/image/ClimbingWorldTour2024.webp"
+                                            alt="Worldtour 2024"><span>WORLDTOUR 2024</span>
+                                    </a>
+                                    <a href="#" (click)="utility.preventDefault($event)"><img
+                                            src="../../assets/image/SS24ClimbingShoes.webp"
+                                            alt="SS24 Climbing Shoes"><span>SS24 CLIMBING SHOES</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#" (click)="utility.preventDefault($event)">UOMO</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">DONNA</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">BAMBINO</a></li>
+                <li><a href="#" (click)="utility.preventDefault($event)">OUTLET</a></li>
+            </ul>
+
+            <h1><a [routerLink]="['/']" id="logo-desktop" [ngClass]="{'cambio-logo': scroll > 500}"><img [src]="logo"
+                        alt="logo"></a>
+            </h1>
+
+            <div class="icon-cart-lens">
+                <a href="#" (click)="utility.preventDefault($event)" (click)="apri_ricerca = true"><i
+                        class="fa-solid fa-magnifying-glass" *ngIf="scroll < 500"></i><span>CERCA</span></a>
+                <a href="#" (click)="utility.preventDefault($event)" (click)="apriCarrello(1, true)"
+                    *ngIf="utility.mostraIcona">
+                    <i class="fa-solid fa-cart-shopping" *ngIf="scroll < 500"></i>
+                    <span>CARRELLO<small *ngIf="cs.totale_quantita > 0">({{cs.totale_quantita}})</small></span>
+                </a>
+                <div class="barra-ricerca" [ngClass]="{'mostra-barra': apri_ricerca === true }">
+                    <form>
+                        <input type="text" placeholder="Cerca nel negozio" [formControl]="barra_ricerca">
+                        <i class="fa-solid fa-x" (click)="chiudiRicerca()"></i>
+                        <button type="submit">cerca</button>
+                    </form>
+                    <div class="risultati">
+                        <ul>
+                            <li *ngFor="let articolo of risultati"><a [routerLink]="['/scheda-articolo', articolo._id]" (click)="chiudiRicerca()">{{articolo.nome}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<div class="blur"
+    [ngClass]="{'transition-menu': utility.apri_carrello > 0, 'effetto-blur': utility.effetto_blur === true }">
+    <div class="carrello">
+        <div class="numero-articoli">
+            <h2>Il tuo carrello <span>({{cs.totale_quantita}})</span></h2>
+            <i class="fa-solid fa-x" (click)="apriCarrello(0, false)"></i>
+        </div>
+        <p *ngIf="cs.carrello.length === 0" class="carrello-vuoto">{{cs.msg_carrello_vuoto}}</p>
+        <div class="articoli-totali" *ngIf="cs.carrello.length != 0">
+            <div class="articolo" *ngFor="let articolo of cs.carrello; let i = index">
+                <div>
+                    <a (click)="indirizza(['scheda-prodotto', articolo.nome ])"><img [src]="articolo.immagine"
+                            [alt]="articolo.nome"></a>
+                    <div>
+                        <h3>{{articolo.nome | uppercase}}</h3>
+                        <p>Colore:</p>
+                        <p>Taglia:</p>
+                        <div class="quantita">
+                            <label>
+                                <p (click)="cs.diminuisciQuantita(articolo)">-</p><input type="number"
+                                    [value]="articolo.quantita" [formControl]="cs.array_formControl[i]"
+                                    (change)="cs.modificaDaInput(cs.array_formControl[i], articolo)">
+                                <p (click)="cs.aumentaQuantita(articolo)">+</p>
+                            </label>
+                            <span><i class="fa-regular fa-circle-xmark"
+                                    (click)="cs.rimuoviArticolo(i)"></i>Elimina</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>{{articolo.prezzo_finale | currency:"EUR"}}</p>
+                        <p>{{articolo.colore}}</p>
+                        <p>{{articolo.taglia}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-checkout">
+                <p>SUBTOTALE: <span>{{cs.subtotale | currency:"EUR"}}</span></p>
+                <a (click)="indirizza(['/modulo-pagamento'])">PROCEDI AL CHECKOUT</a>
+                <a (click)="indirizza(['/carrello'])">VISUALIZZA CARRELLO</a>
+            </div>
+        </div>
+    </div>
+</div>

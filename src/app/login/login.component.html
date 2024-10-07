@@ -1,0 +1,20 @@
+<div class="container-login">
+    
+    <form action="" [formGroup]="account" (ngSubmit)="login()">
+        <h2>Accedi</h2>
+        <div>
+            <label for="email">Email *</label>
+            <input type="text" name="email" formControlName="email">
+        </div>
+        <div>
+            <label for="password">Password *</label>
+            <input type="password" name="password" formControlName="password">
+        </div>
+        <p>Non hai un account? <a [routerLink]="['/registrazione']">Clicca qui</a></p>
+        <button type="submit"
+        [ngClass]="{'invalid-btn': account.invalid}"
+        [disabled]="account.invalid"
+        >Accedi</button>
+    </form>
+    <p class="msg-error" *ngIf="msgError">{{msgError}}</p>
+</div>

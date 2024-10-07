@@ -1,0 +1,496 @@
+@use "../style/utilities/varibili" as var;
+
+:host {
+  display: grid;
+  grid-template-areas:
+    "h2"
+    "riepilogo"
+    "form";
+  grid-template-columns: 1fr;
+  margin-top: 42.2px;
+
+  & h2 {
+    grid-area: h2;
+    padding: var.$pad;
+    font-size: 1.2rem;
+  }
+
+  & i {
+    color: #000;
+  }
+}
+
+.container-riepilogo {
+  grid-area: riepilogo;
+  padding: 0 var.$pad;
+  background-color: #f4f4f4;
+
+  & h3 {
+    display: flex;
+    padding: var.$pad 0;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+
+  & .pagamenti-sicuri {
+    display: none;
+    padding-bottom: var.$pad;
+
+    & p {
+      margin: 5px 0 10px;
+      font-size: 0.8rem;
+    }
+
+    & ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      & i {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+
+.riepilogo-ordine {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 10px;
+
+  &.max-height {
+    max-height: 250px;
+    margin-bottom: 20px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+      background-color: #e4e4e4e4;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 5px;
+    }
+  }
+
+  .totale-ordine {
+    border-bottom: var.$border_b;
+
+    & p {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
+      font-size: 0.8rem;
+
+      &.totale {
+        font-size: 1rem;
+
+        & span {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+.articolo-riepilogo {
+  display: flex;
+  padding: var.$pad 0;
+  flex-wrap: wrap;
+  border-bottom: var.$border_b;
+
+  & span {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  & h4 {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+  }
+
+  & .img {
+    width: 90px;
+    height: 90px;
+  }
+
+  & .info-riepilogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc((100% - 110px));
+    margin-left: 10px;
+  }
+}
+
+.container-dati {
+  grid-area: form;
+}
+
+.container-dati .box-amazonPay {
+  // border: solid 1px red;
+  & p {
+    font-size: 0.8rem;
+  }
+}
+
+.box-amazonPay .amazonPay {
+  padding: var.$pad;
+  background-color: #f4f4f4;
+
+  & h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var.$pad;
+
+    & i {
+      font-size: 0.9rem;
+    }
+  }
+
+  & div {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+
+    & button {
+      width: 100%;
+      padding: 5px 0;
+      background-color: var.$color_b;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    & span {
+      display: block;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    &.max-height2 {
+      max-height: 400px;
+      padding-bottom: 15px;
+      margin-bottom: var.$pad;
+      border-bottom: solid 1px #f4f4f4;
+    }
+  }
+}
+
+.container-form {
+  padding: var.$pad;
+  & h4 {
+    margin-bottom: 10px;
+  }
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: var.$pad 0;
+
+  & button {
+    width: 100%;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background-color: #000;
+    color: #fff;
+    border: solid 1px #000;
+    transition: 0.5s;
+    cursor: pointer;
+
+    &.invalid-btn {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
+    }
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+}
+
+.wizard-form {
+  padding: 10px 0;
+
+  & input {
+    width: 100%;
+    padding: 12px 5px;
+    border: solid 1px #838383;
+    outline: none;
+
+    &.invalid {
+      border-color: red;
+    }
+  }
+}
+
+.dati-spedizione div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.riepilogo-spedizione {
+  padding: 5px 0;
+  border: solid 1px black;
+
+  & ul li {
+    padding: 0 5px;
+    font-size: 0.9rem;
+
+    &:last-child {
+      margin-top: 5px;
+    }
+  }
+}
+
+.dati-spedizione .tipo_spedizione {
+  display: block;
+  padding: 10px 0;
+
+  & label {
+    display: flex;
+    padding: 10px;
+    margin-top: 10px;
+    gap: 10px;
+    border: solid 1px #000;
+    cursor: pointer;
+  }
+
+  & input {
+    padding: 12px 0;
+    display: none;
+
+    &:checked + label {
+      border: solid 1px var.$color_b;
+      background-color: var.$color_b;
+    }
+  }
+}
+
+.dati-carta {
+  padding-top: 10px;
+
+  & h3 {
+    margin-bottom: 10px;
+  }
+
+  & section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    & div {
+      width: 100%;
+
+      & ul {
+        display: flex;
+        gap: 5px;
+        margin-top: 5px;
+      }
+
+      &.w-100 {
+        width: 100%;
+      }
+
+      & label {
+        display: block;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+.thank-you-page {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  padding: var.$pad;
+  background-color: #00000078;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & div {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    background-color: #fff;
+
+    & h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: var.$pad 0;
+      margin-bottom: 40px;
+      border-bottom: solid 4px var.$color_b;
+      font-size: 2rem;
+
+      & i {
+        color: #33b63a;
+      }
+    }
+
+    & p {
+      font-size: 1.1rem;
+    }
+
+    & ul {
+      border: solid 1px black;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px 0;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 700;
+      background-color: #000;
+      color: #fff;
+      border: solid 1px #000;
+      transition: 0.5s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #fff;
+        color: #000;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host {
+    display: grid;
+    grid-template-areas:
+      "h2 riepilogo"
+      "form riepilogo"
+      "... riepilogo";
+    grid-template-columns: repeat(2, calc(100% - 350px) 350px);
+
+    & h2 {
+      grid-area: h2;
+      padding: var.$pad;
+      font-size: 1.8rem;
+    }
+
+    & i {
+      color: #000;
+    }
+  }
+
+  .box-amazonPay {
+    padding: 0 var.$pad;
+  }
+
+  .amazonPay {
+    background-color: #f4f4f4;
+  }
+
+  .container-riepilogo {
+    height: 100%;
+    padding: 80px var.$pad_main_lat var.$pad;
+    background-color: #f4f4f4;
+
+    & .pagamenti-sicuri {
+      display: block;
+    }
+  }
+
+  .articolo-riepilogo {
+    & p {
+      font-size: 0.9rem;
+    }
+
+    & .img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  .thank-you-page div {
+    width: 70%;
+    height: 80%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  :host {
+    margin-top: 104px;
+    grid-template-columns: repeat(2, calc(100% - 420px) 420px);
+  }
+
+  .container-form .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var.$pad;
+    padding: var.$pad 0;
+
+    & button {
+      width: calc(50% - 10px);
+    }
+  }
+
+  .dati-spedizione div {
+    display: flex;
+    flex-wrap: wrap;
+
+    & input {
+      width: calc(50% - 5px);
+
+      &.w-100 {
+        width: 100%;
+      }
+    }
+  }
+
+  .dati-carta section div {
+    width: calc(50% - 5px);
+
+    &.w-100 {
+      width: 100%;
+    }
+  }
+
+  .thank-you-page div {
+    width: 60%;
+    height: 70%;
+    position: relative;
+
+    & button {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  :host {
+    padding: 0 80px;
+    grid-template-columns: repeat(2, calc(100% - 420px - 100px) 420px);
+    gap: 0 100px;
+  }
+
+  .thank-you-page div {
+    width: 50%;
+  }
+}

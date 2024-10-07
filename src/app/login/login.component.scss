@@ -1,0 +1,92 @@
+@use "../style/utilities/varibili" as var;
+
+:host {
+  display: block;
+  margin-top: 42.2px;
+}
+
+.container-login {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: var.$pad;
+
+  & .msg-error {
+    width: 100%;
+    text-align: center;
+    color: red;
+  }
+}
+
+form {
+  width: 100%;
+  padding: 40px var.$pad;
+
+  & h2 {
+    text-align: center;
+  }
+
+  & label {
+    display: block;
+    margin: 5px 0;
+    font-size: 0.9rem;
+  }
+
+  & input {
+    width: 100%;
+    padding: 12px 5px;
+    margin-bottom: 15px;
+    border: solid 1px #838383;
+    outline: none;
+
+    &.invalid {
+      border-color: red;
+    }
+  }
+
+  & a {
+    display: inline;
+  }
+
+  & button {
+    width: 100%;
+    padding: 12px 0;
+    margin-top: var.$pad;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: #000;
+    color: #fff;
+    border: solid 1px #000;
+    transition: 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    &.invalid-btn {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  form {
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  :host {
+    margin-top: 104px;
+  }
+
+}

@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+
+* {
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    &::-webkit-scrollbar {
+      width: 3px;
+      background-color: rgba(228, 228, 228, 0.896);
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 5px;
+    }
+  }
+  
+  body {
+    overflow-x: hidden;
+    position: relative;
+  
+    &.overflow-hidden {
+      overflow-y: hidden;
+    }
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  
+  a {
+    display: block;
+    text-decoration: none;
+  }
+  
+  i {
+    color: #fff;
+    cursor: pointer;
+  }
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

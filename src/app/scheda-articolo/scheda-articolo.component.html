@@ -1,0 +1,110 @@
+<ul class="bread-crumbs" *ngIf="articolo">
+    <li><a [routerLink]="['/']">Home /</a></li>
+    <li><a [routerLink]="['/articoli', articolo.attivita]">{{articolo.attivita}} /</a></li>
+    <li><a [routerLink]="['/scheda-articolo', articolo._id]">{{articolo.nome | uppercase}}</a></li>
+</ul>
+<div class="popup-aggiunta" *ngIf="mostra_popup">
+    <div>
+        <i class="fa-solid fa-xmark" (click)="chiudiPopup()"></i>
+        <p>Hai aggiunto l'articolo al tuo <span>carrello</span></p>
+    </div>
+</div>
+<div class="scheda-articolo" *ngIf="articolo">
+    <div class="immagini-articolo">
+        <div>
+            <picture>
+                <source [srcset]="articolo.immagine[3]" media="(min-width: 1300px)">
+                <source [srcset]="articolo.immagine[2]" media="(min-width: 768px)">
+                <source [srcset]="articolo.immagine[1]" media="(min-width: 576px)">
+                <source [srcset]="articolo.immagine[0]">
+                <img [src]="articolo.immagine[0]" [alt]="articolo.nome">
+            </picture>
+            <picture>
+                <source [srcset]="articolo.immagine[5]" media="(min-width: 576px)">
+                <source [srcset]="articolo.immagine[4]">
+                <img [src]="articolo.immagine[4]" [alt]="articolo.nome">
+            </picture>
+            <picture>
+                <source [srcset]="articolo.immagine[7]" media="(min-width: 576px)">
+                <source [srcset]="articolo.immagine[6]">
+                <img [src]="articolo.immagine[6]" [alt]="articolo.nome">
+            </picture>
+        </div>
+    </div>
+    <div class="container-dettagli">
+        <div class="dettagli-sticky">
+            <div class="nome-articolo">
+                <div>
+                    <h2>{{articolo.nome | uppercase}}</h2>
+                    <p>{{articolo.attivita}}</p>
+                </div>
+                <div>
+                    <p>
+                        <i class="fa-solid fa-star" *ngIf="articolo.best_seller>1"></i>
+                        <i class="fa-solid fa-star" *ngIf="articolo.best_seller>2"></i>
+                        <i class="fa-solid fa-star" *ngIf="articolo.best_seller>3"></i>
+                        <i class="fa-solid fa-star" *ngIf="articolo.best_seller>4"></i>
+                        <i class="fa-solid fa-star" *ngIf="articolo.best_seller==5"></i>
+                    </p>
+                    <p>{{articolo.prezzo | currency:"EUR"}}</p>
+                </div>
+                <p>{{articolo.descrizione}}</p>
+            </div>
+            <div class="dettagli-articolo">
+                <div class="colori">
+                    <h3>Colori</h3>
+                    <ul>
+                        <li *ngFor="let colore of colori_disponibili">
+                            <input type="radio" [id]="colore.nome_colore" [value]="colore.nome_colore" name="colore"
+                                [formControl]="colore_selezionato">
+                            <label [for]="colore.nome_colore">
+                                <div [ngStyle]="{'background-color': colore.primo}"></div>
+                                <div [ngStyle]="{'background-color': colore.secondo}"></div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="taglie">
+                    <h3>Taglie<span><i class="fa-solid fa-question"></i><a href="#"
+                                (click)="utility.preventDefault($event)">Guida alle taglie</a></span></h3>
+                    <ul>
+                        <li *ngFor="let taglia of articolo.taglie_disponibili">
+                            <input type="radio" [id]="taglia" [value]="taglia" name="taglie"
+                                [formControl]="taglia_selezionata">
+                            <label [for]="taglia">{{taglia}}</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-aggiungi">
+                    <button type="button" (click)="aggiungiArticolo()"
+                        [disabled]="taglia_selezionata.invalid || colore_selezionato.invalid"
+                        [ngClass]="{'invalid-btn': taglia_selezionata.invalid || colore_selezionato.invalid}">AGGIUNGI
+                        AL
+                        CARRELLO</button>
+                    <p><i class="fa-solid fa-truck-fast"></i>Spedizione gratuita a partire da 180€</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tech-info">
+    <p *ngIf="articolo">{{articolo.descrizione}}</p>
+    <div>
+        <h4>TECH INFO<i class="fa-solid fa-chevron-down"></i></h4>
+        <h4>PLUS<i class="fa-solid fa-chevron-down"></i></h4>
+    </div>
+</div>
+<!-- <h2 class="text-center">PRODOTTI SIMILI</h2>
+<div class="container-articoli-correlati">
+    <div class="articoli-correlati">
+        <div class="card" *ngFor="let a of articoli_correlati">
+            <a [routerLink]="['/scheda-articolo', a._id]"><img [src]="a.immagine[0]" [alt]="a.nome">
+                <i class="fa-regular fa-heart"></i></a>
+            <div class="card-body">
+                <h4>{{a.nome | uppercase}}</h4>
+                <p>Colori disponibili: {{a.colori_disponibili.length}}</p>
+                <p>A partire da: {{a.prezzo | currency:"EUR"}}</p>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,126 @@
+@use "../style/utilities/varibili" as var;
+
+:host {
+    display: block;
+    padding: var.$pad;
+}
+
+.container-newsletter {
+  margin-top: var.$pad_main_lat;
+  padding: var.$pad_main_lat 0;
+
+  h2 {
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  & p {
+    margin: var.$pad 0;
+  }
+
+  & .btn-newsletter {
+    margin: 0 auto;
+    width: 220px;
+    padding: 10px;
+    background-color: var.$color_b;
+    color: #000;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+}
+
+.container-newsletter .newsletter {
+  display: flex;
+  padding-bottom: var.$pad_main_lat;
+  gap: var.$pad;
+
+  & div {
+    width: 33.3%;
+
+    & a {
+      height: 100%;
+      font-size: 0.6rem;
+      color: #000;
+
+      &:hover {
+        color: var.$color_b;
+      }
+
+      & span {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: solid 2px #000;
+
+        & i {
+          font-size: 1rem;
+          color: #000;
+        }
+      }
+
+      & p {
+        margin-top: 10px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+    :host {
+        padding: var.$pad_main_lat;
+    }
+    
+    .container-newsletter {
+      margin-top: var.$pad_main_lat;
+      padding: var.$pad_main_lat 0;
+    
+      h2 {
+        text-align: left;
+        font-size: 1.8rem;
+      }
+    
+      & p {
+        font-size: 1.05rem;
+        margin: var.$pad 0;
+      }
+    
+      & .btn-newsletter {
+        margin: 0;
+      }
+    }
+  
+  
+    .container-newsletter .newsletter {
+    
+      & div {
+    
+        & a {
+    
+          & span {
+            width: 45px;
+            height: 45px;
+    
+            & i {
+              font-size: 1.5rem;
+              color: #000;
+            }
+          }
+    
+          & p {
+            font-size: 1.5rem;
+            font-weight: 700;
+          }
+          
+        }
+      }
+    }
+  }
